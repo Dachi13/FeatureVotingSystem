@@ -1,92 +1,105 @@
-# **Feature Voting System**
+# Feature Voting System
 
-### მოკლე აღწერა
+### Brief Description
 
-პროექტის მიზანია შეიქმნას აპლიკაცია, სადაც პროდუქტების შემქნელებს საშუალებას მისცემს დაარეგისტრირონ პროდუქტი. მომხმარებლების მიერ მოხდება პროდუქტის ფუნქციონალის მოთხოვნა და სხვა ფუნქციებისთვის ხმის მიცემა.
+The goal of this project is to create an application that allows product creators to register their products. Users can request new features for these products and vote on the proposed features.
 
-### ძირითადი მოდულები
+## Table of Contents
 
-1. მომხმარებლები
-2. პროდუქტების მართვა
-3. ფუნქციონალის მოთხოვნა
-4. ხმის მიცემა
-5. კომენტარები
-6. რეპორტები
-7. შეტყობინებები
+- [Main Modules](#main-modules)
+- [Users](#users)
+- [Product Management](#product-management)
+- [Feature Requests](#feature-requests)
+- [Voting](#voting)
+- [Comments](#comments)
+- [Reports](#reports)
+- [Notifications](#notifications)
 
-### მომხმარებლები
+## Main Modules
 
-მომხმარებლებს უნდა შეეძლოთ რეგისტრაცია, ავტორიზაცია, პროდუქტების მართვა და ხმის მიცემა.
+1. Users
+2. Product Management
+3. Feature Requests
+4. Voting
+5. Comments
+6. Reports
+7. Notifications
 
-მომხმარებელს უნდა ჰქონდეს შემდეგი ველები:
+## Users
 
-- სახელი *
-- გვარი *
-- ელ. ფოსტა *
-- პაროლი *
-- რეგისტრაციის თარიღი *
+Users should be able to register, authenticate, manage products, and vote on feature requests.
 
-### პროდუქტების მართვა
+A user should have the following fields:
 
-მომხმარებელს უნდა შეეძლოს პროდუქტის რეგისტრაცია, რედაქტირება და წაშლა.
+- First Name *
+- Last Name *
+- Email *
+- Password *
+- Registration Date *
 
-პროდუქტს უნდა გააჩნდეს შემდეგი ველები:
+## Product Management
 
-- სახელი *
-- მოკლე აღწერა *
-- პროდუქტის ავტორის იდენტიფიკატორი *
-- შექმნის თარიღი *
-- მოთხოვნილი ფუნქციონალი *
-    - ფუნქციონალის სახელი *
-    - აღწერა *
-    - ფუნქციონალის შემოთავაზების ავტორის იდენტიფიკატორი *
-    - დადებითი ხმები * (Upvote)
-    - უარყოფითი ხმები * (Downvote)
-    - სტატუსი * (აქტიური, მიმდინარე,  წაშლილი, უარყოფილი, დასრულებული)
-        - აქტიური - ენიჭება როდესაც მომხმარებელი დააფიქსირებს ფუნქციონალის მოთხოვნას
-        - მიმდინარე - ენიჭება პროდუქტის ავტორის მიერ და ნიშნავს რომ ფუნქციონალის იმპლემენტაცია დაწყებულია
-        - წაშლილი - ენიჭება როცა ფუნქციონალის ავტორის მიერ მოხდა წაშლა
-        - უარყოფილი - ენიჭება როდესაც პროდუქტის ავტორი არ აპირებს ფუნქციონალის იმპლემენტაციას (ამ შემთხვევაში უარყოფის მიზეზი ველი უნდა იყოს აუცილებელი)
-        - დასრულებული - ენიჭება პროდუქტის ავტორის მიერ, როდესაც ფუნქციონალის იმპლემენტაცია დასრულდა
-    - უარყოფის მიზეზი
-    - კომენტარები
+Users should be able to register, edit, and delete products.
 
-### ფუნქციონალის მოთხოვნა
+A product should have the following fields:
 
-მომხმარებელს უნდა შეეძლოს ნებისმიერი პროდუქტისთვის დააფიქსიროს ფუნქციონალის მოთხვნა. დღის განმავლობაში, ერთი პროდუქტის ფარგლებში, დღის განმავლობაში უნდა შეეძლოს მაქსიმუმ 10 ფუნქციონალის მოთხოვნა.
+- Name *
+- Short Description *
+- Product Author ID *
+- Creation Date *
+- Requested Features *
+  - Feature Name *
+  - Description *
+  - Feature Request Author ID *
+  - Upvotes *
+  - Downvotes *
+  - Status * (Active, In Progress, Deleted, Rejected, Completed)
+    - Active - Assigned when a user submits a feature request
+    - In Progress - Assigned by the product author, indicating that the feature implementation has started
+    - Deleted - Assigned when the feature author deletes the request
+    - Rejected - Assigned when the product author does not intend to implement the feature (in this case, the reason for rejection must be provided)
+    - Completed - Assigned by the product author when the feature implementation is finished
+  - Rejection Reason
+  - Comments
 
-ფუნქციონალის მოთხოვნის შექმნის შემდეგ, უნდა შეეძლოს მისი რედაქტირება ან წაშლა. 
+## Feature Requests
 
-### ხმის მიცემა
+Users should be able to submit feature requests for any product. Within a day, a user should be able to submit a maximum of 10 feature requests per product.
 
-მომხმარებელს უნდა შეეძლოს ნებისმიერი პროდუქტის ნებისმიერი მოთხოვნილი ფუნციონალისთვის ხმის მიცემა. კვირის განმავლობაში, ერთი პროდუქტის ფარგლებში ხმის მიცემა (დადებითი და უარყოფითი) უნდა შეეძლოს მხოლოდ 3-ჯერ.
+After creating a feature request, the user should be able to edit or delete it.
 
-### კომენტარები
+## Voting
 
-მომხმარებელს ასევე უნდა შეეძლოს ნებისმიერ მოთხოვნილ ფუნქციონალზე კომენტარის დატოვება.
+Users should be able to vote (upvote or downvote) on any requested feature for any product. Within a week, a user should be able to vote (upvote or downvote) a maximum of 3 times per product.
 
-### რეპორტები
+## Comments
 
-მომხმარებლებს უნდა შეეძლოთ შემდეგი ტიპის რეპორტების ნახვა:
+Users should also be able to leave comments on any requested feature.
 
-- პროდუქტის ავტორები
-    - არჩეულ პერიოდში (კვირა/თვე/სულ) მოთხოვნილი ფუნქციონალების რაოდენობა
-    - არჩეულ პერიოდში (კვირა/თვე/სულ) მოთხოვნილ ფუნქციონალებზე ჯამურად მიცებული ხმების რაოდენობა (დადებითი და უარყოფითი ცალ-ცალკე)
-    - არჩეულ პერიოდში (კვირა/თვე/სულ) ფუნქციონალების ჩამონათვალი სტატუსების და ხმების რაოდენობის მიხედვით
-- მომხმარებლები
-    - არჩეულ პერიოდში (კვირა/თვე/სულ) მათ მიერ მოთხოვნილი ფუნქციონალების სია სტატუსების მიხედვით
-    - არჩეულ პერიოდში (კვირა/თვე/სულ) მოთხოვნილი ფუნქციონალებზე ჯამში მიცემული ხმების რაოდენობა (დადებითი და უარყოფითი ცალ-ცალკე)
+## Reports
 
-### შეტყობინებები
+Users should be able to view the following types of reports:
 
-მომხმარებელს ელ. ფოსტაზე უნდა მისდიოდეს შემდეგი ტიპის შეტყობინებები:
+- **Product Authors**
+  - Number of feature requests for the selected period (week/month/all)
+  - Total number of votes (upvotes and downvotes separately) on requested features for the selected period (week/month/all)
+  - List of features with their statuses and vote counts for the selected period (week/month/all)
+- **Users**
+  - List of feature requests submitted by the user with their statuses for the selected period (week/month/all)
+  - Total number of votes (upvotes and downvotes separately) on requested features for the selected period (week/month/all)
 
-- როდესაც მის მიერ დარეგისტრირებულ პროდუქტზე სხვა მომხმარებელი:
-    - დაარეგისტრირებს ფუნქციონალის მოთხოვნას
-    - არსებულ ფუნქციონალზე დაწერს კომენტარს
-    - ხმას მისცემს
-    - ფუნქციონალის ავტორი შეცვლის მოთხოვნის აღწერას
-- როდესაც მის მიერ დარეგისტირებულ ფუნქციონალის მოთხოვნაზე სხვა მომხმარებელი:
-    - ხმას მისცემს
-    - დაწერს კომენტარს
-    - პროდუქტის ავტორი შეუცვლის სტატუსს
+## Notifications
+
+Users should receive the following types of notifications via email:
+
+- When another user:
+  - Submits a feature request for a product registered by the user
+  - Leaves a comment on an existing feature of a product registered by the user
+  - Votes on a feature of a product registered by the user
+  - Changes the description of a feature request submitted by the user
+- When another user:
+  - Votes on a feature request submitted by the user
+  - Leaves a comment on a feature request submitted by the user
+  - The product author changes the status of a feature request submitted by the user
+
+This README file provides an overview of the "Feature Voting System" project, including its main modules, user roles, and functionalities. It outlines the required fields for users, products, and feature requests, as well as the voting, commenting, reporting, and notification systems. This information should help users understand the project's structure and requirements.
