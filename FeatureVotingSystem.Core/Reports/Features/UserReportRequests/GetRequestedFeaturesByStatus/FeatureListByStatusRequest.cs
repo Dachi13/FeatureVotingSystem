@@ -1,0 +1,3 @@
+﻿namespace FeatureVotingSystem.Core.Reports.Features.UserReportRequests.GetRequestedFeaturesByStatus;
+
+public record FeatureListByStatusRequest(ReportTimeFrame reportTimeFrame);

@@ -1,0 +1,8 @@
+﻿using FeatureVotingSystem.Core.Reports.Features.ProductAuthorReportRequests.Shared.Models.Requests;
+
+namespace FeatureVotingSystem.Core.Reports.Features.ProductAuthorReportRequests.GetRequestedFeaturesByVotesQuantityAndStatus;
+
+public interface IGetRequestedFeaturesByVotesQuantityAndStatusService
+{
+    Task<IEnumerable<FeatureListByVotesQuantityAndStatusResponse>> GetRequestedFeaturesByVotesQuantityAndStatusAsync(int userId, ProductAuthorReportRequest productAuthorReportRequest);
+}

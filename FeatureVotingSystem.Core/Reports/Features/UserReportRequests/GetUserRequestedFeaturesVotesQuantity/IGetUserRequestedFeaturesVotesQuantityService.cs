@@ -1,0 +1,7 @@
+﻿namespace FeatureVotingSystem.Core.Reports.Features.UserReportRequests.GetUserRequestedFeaturesVotesQuantity;
+
+public interface IGetUserRequestedFeaturesVotesQuantityService
+{
+    Task<IEnumerable<UserRequestedFeatureVotesQuantityResponse>> GetUserRequestedFeaturesVotesQuantityAsync(int userId, UserRequestedFeatureVotesQuantityRequest userRequestedFeatureVotesQuantityRequest);
+    Task<IEnumerable<UserRequestedFeatureVotesQuantityResponse>> GetUserRequestedFeaturesVotesQuantityAsync(int userId);
+}

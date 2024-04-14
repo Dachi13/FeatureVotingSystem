@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Sql\Script0001 - CreateInitialTables.sql" />
+    <None Remove="Sql\Script0002 - AddDynamicStoredProceduresForGettingReports.sql" />
+    <None Remove="Sql\Script0003 - AddStoredProcedureForProductDeletion.sql" />
+    <None Remove="Sql\Script0004 - AddProceduresForDeletingFeatuesCommentsVotes.sql" />
+    <None Remove="Sql\Script0005 - AddTablesForEmailBackgroundWorker.sql" />
+    <None Remove="Sql\Script0006 - AddProceduresForEmailQueueRepositoryMethods.sql" />
+    <None Remove="Sql\Script0007 - AddProcedureForCheckingIfProductWithGivenNameAlreadyExists.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\Script0001 - CreateInitialTables.sql" />
+    <EmbeddedResource Include="Sql\Script0002 - AddDynamicStoredProceduresForGettingReports.sql" />
+    <EmbeddedResource Include="Sql\Script0003 - AddStoredProcedureForProductDeletion.sql" />
+    <EmbeddedResource Include="Sql\Script0004 - AddProceduresForDeletingFeatuesCommentsVotes.sql" />
+    <None Remove="Sql\Script0012 - DeletedOldIndexOnVotesAddedNewAndDeletedIsDeletedColumnOnFeaturesTable.sql" />
+    <EmbeddedResource Include="Sql\Script0007 - AddProcedureForCheckingIfProductWithGivenNameAlreadyExists.sql" />
+    <EmbeddedResource Include="Sql\Script0005 - AddTablesForEmailBackgroundWorker.sql" />
+    <EmbeddedResource Include="Sql\Script0006 - AddProceduresForEmailQueueRepositoryMethods.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup" Version="5.0.40" />
+    <PackageReference Include="dbup-sqlserver" Version="5.0.40" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
