@@ -29,11 +29,6 @@ public class ChangeFeaturePropertiesService : IChangeFeaturePropertiesService
 
     public async Task<int> ChangeAsync(ChangeFeaturePropertiesRequest featurePropertiesRequest)
     {
-        var validationResult = FeatureValidations.ValidateChangeFeaturePropertiesRequest(featurePropertiesRequest);
-
-        if (!validationResult.IsValid)
-            throw new FeatureBadRequestException(validationResult.Errors.First().ErrorMessage);
-
         var feature = await _getFeature.GetByIdAsync(featurePropertiesRequest.Id);
 
         if (feature is null || feature.StatusId == (int)Status.Deleted) throw new FeatureNotFoundException();
