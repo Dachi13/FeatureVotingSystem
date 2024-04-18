@@ -1,4 +1,6 @@
-﻿namespace FeatureVotingSystem.Core.Products.Features.CreateProduct;
+﻿using FeatureVotingSystem.Shared.Entities.Exceptions;
+
+namespace FeatureVotingSystem.Core.Products.Features.CreateProduct;
 
 public class CreateProductRequest
 {
@@ -7,5 +9,17 @@ public class CreateProductRequest
     public int UserId { get; private set; }
     public DateTime CreatedAt { get; } = DateTime.Now;
 
-    public void SetUserId(int userId) => UserId = userId;
+    public void SetUserId(int userId)
+    {
+        UserId = userId;
+        Validate();
+    }
+
+    private void Validate()
+    {
+        var validationResult = ProductValidations.ValidateCreateProductRequest(this);
+
+        if (!validationResult.IsValid)
+            throw new ProductBadRequestException(validationResult.Errors.First().ErrorMessage);
+    }
 }
