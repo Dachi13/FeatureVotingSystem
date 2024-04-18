@@ -26,11 +26,6 @@ public class CreateFeatureService : ICreateFeatureService
 
     public async Task<int> CreateAsync(CreateFeatureRequest request)
     {
-        var validationResult = FeatureValidations.ValidateCreateFeatureRequest(request);
-
-        if (!validationResult.IsValid)
-            throw new FeatureBadRequestException(validationResult.Errors.First().ErrorMessage);
-
         var userIsAbleToPlaceNewFeature = await IsUserAbleToPlaceNewFeature(request);
 
         if (!userIsAbleToPlaceNewFeature)
