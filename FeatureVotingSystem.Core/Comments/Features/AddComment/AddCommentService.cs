@@ -32,11 +32,6 @@ public class AddCommentService : IAddCommentService
 
     public async Task<int> AddCommentAsync(AddCommentRequest request)
     {
-        var validationResult = CommentValidations.ValidateCommentRequest(request);
-
-        if (!validationResult.IsValid)
-            throw new CommentBadRequestException(validationResult.Errors.First().ErrorMessage);
-
         var feature = await _getFeatureRepository.GetByIdAsync(request.FeatureId);
 
         if (feature is null || feature.StatusId == (int)Status.Deleted) throw new FeatureNotFoundException();
