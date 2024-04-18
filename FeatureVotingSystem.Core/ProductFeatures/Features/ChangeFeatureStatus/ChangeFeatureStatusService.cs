@@ -29,11 +29,6 @@ public class ChangeFeatureStatusService : IChangeFeatureStatusService
 
     public async Task<int> ChangeAsync(ChangeFeatureStatusRequest request)
     {
-        var validationResult = FeatureValidations.ValidateChangeFeatureStatusRequest(request);
-
-        if (!validationResult.IsValid)
-            throw new FeatureBadRequestException(validationResult.Errors.First().ErrorMessage);
-
         var feature = await _getFeatureRepository.GetByIdAsync(request.FeatureId);
 
         if (feature is null || feature.StatusId == (int)Status.Deleted) throw new FeatureNotFoundException();
@@ -51,7 +46,7 @@ public class ChangeFeatureStatusService : IChangeFeatureStatusService
         var featureOwner = (await _getUserByIdRepository.FindByIdAsync(feature.UserId.ToString()))!;
 
         var emailMessage = $"Under {product.Name} on feature '{feature.Name}' status has been changed by the owner";
-        
+
         await _addEmailInQueueRepository.AddEmailInQueueAsync(featureOwner.Id, (int)EmailSubject.FeatureStatusChange,
             emailMessage);
 
