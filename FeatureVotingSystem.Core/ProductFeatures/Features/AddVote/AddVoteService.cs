@@ -53,11 +53,6 @@ public class AddVoteService : IAddVoteService
 
     private async Task<int> Vote(VoteRequest voteRequest)
     {
-        var validationResult = FeatureValidations.ValidateVoteRequest(voteRequest);
-
-        if (!validationResult.IsValid)
-            throw new VoteBadRequestException(validationResult.Errors.First().ErrorMessage);
-
         var feature = await _getFeatureRepository.GetByIdAsync(voteRequest.FeatureId);
 
         if (feature is null || feature.StatusId == (int)Status.Deleted) throw new FeatureNotFoundException();
