@@ -12,8 +12,6 @@ namespace FeatureVotingSystem.Worker;
 public class EmailWorker : BackgroundService
 {
     private readonly WorkerConfig _workerConfig;
-    private readonly IGetQueuedEmailsRepository _getQueuedEmailsRepository;
-    private readonly IUpdateEmailQueueStatusRepository _updateEmailQueueStatusRepository;
     private readonly IEmailSender _emailSender;
     private readonly ILoggerManager _loggerManager;
     private readonly IServiceScopeFactory _serviceScopeFactory;
@@ -37,22 +35,26 @@ public class EmailWorker : BackgroundService
         {
             try
             {
-                using IServiceScope scope = _serviceScopeFactory.CreateScope();
-                IGetQueuedEmailsRepository _getQueuedEmailsRepository = scope.ServiceProvider.GetRequiredService<IGetQueuedEmailsRepository>();
-                IUpdateEmailQueueStatusRepository _updateEmailQueueStatusRepository = scope.ServiceProvider.GetRequiredService<IUpdateEmailQueueStatusRepository>();
-                var queue = await _getQueuedEmailsRepository.GetQueuedEmailsAsync();
+                using var scope = _serviceScopeFactory.CreateScope();
+                var getQueuedEmailsRepository = scope.ServiceProvider.GetRequiredService<IGetQueuedEmailsRepository>();
+                var updateEmailQueueStatusRepository =
+                    scope.ServiceProvider.GetRequiredService<IUpdateEmailQueueStatusRepository>();
+                var queue = await getQueuedEmailsRepository.GetQueuedEmailsAsync();
 
                 foreach (var item in queue)
-                {
-                    await _emailSender.SendEmailAsync(item.SubjectName, item.Email, item.UserName, item.EmailText);
-                    await _updateEmailQueueStatusRepository.UpdateEmailQueueStatusAsync(item.Id);
-                }
-
+                    try
+                    {
+                        await _emailSender.SendEmailAsync(item.SubjectName, item.Email, item.UserName, item.EmailText);
+                        await updateEmailQueueStatusRepository.UpdateEmailQueueStatusAsync(item.Id);
+                    }
+                    catch (Exception e)
+                    {
+                        _loggerManager.LogError(e.Message);
+                    }
             }
             catch (Exception ex)
             {
-
-                _loggerManager.LogError(ex.Message);;
+                _loggerManager.LogError(ex.Message);
             }
 
             await Task.Delay(_workerConfig.DelayInSeconds, stoppingToken);
