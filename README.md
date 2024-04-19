@@ -102,4 +102,4 @@ Users should receive the following types of notifications via email:
   - Leaves a comment on a feature request submitted by the user
   - The product author changes the status of a feature request submitted by the user
 
-This README file provides an overview of the "Feature Voting System" project, including its main modules, user roles, and functionalities. It outlines the required fields for users, products, and feature requests, as well as the voting, commenting, reporting, and notification systems. This information should help users understand the project's structure and requirements.
+This README file provides an overview of the "Feature Voting System" project, including its main modules, user roles, and functionalities. It outlines the required fields for users, products, and feature requests, as well as the voting, commenting, reporting, and notification systems. This information should help users understand the project's structure and requirements. Also I provided a picture of an ER diagram of the database (FeatureVotingSystem-ER-Diagram.png) to better understand how entities are relating to each other.
